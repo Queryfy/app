@@ -71,9 +71,6 @@ function App() {
           )
         }
         </div>
-        {/* <div className="flex flex-wrap">
-
-        </div> */}
       </div>
       <CTA/>
     </div>
