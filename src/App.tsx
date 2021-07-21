@@ -25,6 +25,7 @@ function App() {
     setLoading(true);
     getProducts(query)
       .then(items => {
+        console.log(items);
         items.sort((a: Product, b: Product) => a.priceParsed - b.priceParsed);
         setProducts(items);
         setLoading(false);
@@ -57,7 +58,7 @@ function App() {
         </div>
         <div className="flex flex-wrap">
         {loading ?
-          [0,1,2,3,4,5,6,7,8].map(d => (<Skeleton/>))
+          [0,1,2,3,4,5,6,7,8].map(d => (<Skeleton key={d}/>))
          :
           products.map((product: Product) =>
             <a className="w-full md:w-1/3 my-6" href={product.url} target="_blank" rel="noopener noreferrer">
