@@ -14,11 +14,11 @@ interface Product {
   ecommerce: string,
 }
 
-const ChipColors: Map<Ecommerce, string> = new Map([
-  ['EXITO', 'yellow'],
-  ['MERCADOLIBRE', 'green'],
-  ['FALABELLA', 'blue'],
-  ['ALKOSTO', 'red'],
+const ChipColors: Map<Ecommerce, string[]> = new Map([
+  ['EXITO', ['bg-yellow-100', 'text-yellow-500']],
+  ['MERCADOLIBRE', ['bg-green-100', 'text-green-500']],
+  ['FALABELLA', ['bg-blue-100', 'text-blue-500']],
+  ['ALKOSTO', ['bg-red-100', 'text-red-500']],
 ]);
 
 export const Products = () => {
@@ -64,16 +64,16 @@ export const Products = () => {
           </span>
         </div>
       </div>
+      {error && <div className="border-red-200 text-red-500 rounded p-4 mx-auto">Algo salió mal, por favor intentalo nuevamente...</div>}
       <div className="flex flex-wrap">
-        {error && <div className="border-red-200 text-red-500 rounded p-4 mx-auto">Algo salió mal, por favor intentalo nuevamente...</div>}
         {loading ?
           [0,1,2,3,4,5,6,7,8].map(d => (<Skeleton key={d}/>))
           :
           products.map((product: Product) =>
-            <a className="w-full md:w-1/3 my-6" href={product.url} target="_blank" rel="noopener noreferrer">
+            <a key={product.url} className="w-full md:w-1/3 my-6" href={product.url} target="_blank" rel="noopener noreferrer">
               <div className="p-6 mx-3 bg-gray-50 shadow rounded-md h-full">
                 <span
-                  className={`border-gray-200 bg-${ChipColors.get(product.ecommerce as Ecommerce)}-100 text-${ChipColors.get(product.ecommerce as Ecommerce)}-500 rounded-full px-2 py-1 my-4`}>
+                  className={`border-gray-200 ${ChipColors.get(product.ecommerce as Ecommerce)?.join(' ')} rounded-full px-2 py-1 my-4`}>
                   {product.ecommerce}
                 </span>
                 <img className="mb-6 mt-3 w-auto max-h-48 mx-auto mix-blend-multiply" src={product.image} alt=""></img>
